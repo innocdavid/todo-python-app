@@ -5,13 +5,15 @@
 </head>
 <body>
     <h1>Todo List</h1>
+    <a href="{% url 'todo_create' %}">Create New Todo</a>
     <ul>
         {% for todo in todos %}
         <li>
             <h2>{{ todo.title }}</h2>
             <p>{{ todo.description }}</p>
             <p>Completed: {{ todo.completed }}</p>
-            
+            <a href="{% url 'todo_update' todo.pk %}">Edit</a>
+            <a href="{% url 'todo_delete' todo.pk %}">Delete</a>
         </li>
         {% empty %}
         <li>No todos found.</li>
@@ -19,4 +21,5 @@
     </ul>
 </body>
 </html>
+
 
