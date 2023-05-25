@@ -26,3 +26,10 @@ def todo_update(request, pk):
     else:
         form = TodoForm(instance=todo)
     return render(request, 'app/todo_update.html', {'form': form})
+
+def todo_delete(request, pk):
+    todo = get_list_or_404(Todo, pk=pk)
+    if request.method == 'POST':
+        todo.delete()
+        return redirect('todo_list')
+    return render(request, 'app/todo_delete.html', {'todo': todo})
