@@ -15,3 +15,14 @@ def todo_create(request):
     else:
         form = TodoForm()
     return render(request, 'app/todo_create.html', {'form': form})
+
+def todo_update(request, pk):
+    todo = get_list_or_404(Todo, pk=pk)
+    if request.method == 'POST':
+        form = TodoForm(request.POST, instance=todo)
+        if form.is_valid():
+            form.save()
+            return redirect('todo_list')
+    else:
+        form = TodoForm(instance=todo)
+    return render(request, 'app/todo_update.html', {'form': form})
